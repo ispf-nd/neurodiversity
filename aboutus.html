@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - ISPF</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom font family for the body */
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      /* Styles for showing myth and revealing reality on click */
+      .myth-reality {
+        display: none; /* Reality is hidden by default */
+      }
+      .myth-card.active .myth-statement {
+        display: none; /* Hide the myth statement when the card is active (clicked) */
+      }
+      .myth-card.active .myth-reality {
+        display: block; /* Show the reality when the card is active (clicked) */
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-900">
+    <nav class="fixed top-0 w-full z-10 bg-white shadow-md rounded-b-lg">
+      <div
+        class="container mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center"
+      >
+        <div class="text-2xl font-bold text-gray-800">
+          <a
+            href="index.html"
+            class="flex items-center text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300 rounded-md p-2"
+          >
+            <img src="assets/home.svg" alt="Home" class="w-6 h-6 mr-2" />
+            ispf
+          </a>
+        </div>
+        <ul class="hidden md:flex space-x-8">
+          <li>
+            <a
+              href="#mission"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200"
+              data-key="nav_mission"
+            ></a>
+          </li>
+          <li>
+            <a
+              href="#documentations"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200"
+              data-key="nav_documentation"
+            ></a>
+          </li>
+          <li>
+            <a
+              href="#members"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200"
+              data-key="nav_member"
+            ></a>
+          </li>
+        </ul>
+
+        <div class="flex items-center space-x-4">
+          <button
+            id="mobile-menu-button"
+            class="md:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          >
+            <svg
+              class="w-6 h-6 text-gray-700"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+          <div
+            id="languageSwitcher"
+            class="w-12 h-12 bg-white text-black flex items-center justify-center rounded-full cursor-pointer transition-colors duration-300 shadow-sm hover:shadow-md"
+          >
+            <span id="languageText" class="font-semibold">ID</span>
+          </div>
+        </div>
+      </div>
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white shadow-lg rounded-b-lg py-2"
+      >
+        <ul class="flex flex-col items-center space-y-2 px-4">
+          <li>
+            <a
+              href="#mission"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200"
+              data-key="nav_mission"
+            ></a>
+          </li>
+          <li>
+            <a
+              href="#documentations"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200"
+              data-key="nav_documentation"
+            ></a>
+          </li>
+          <li>
+            <a
+              href="#members"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200"
+              data-key="nav_member"
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="mx-4 md:mx-auto w-full mt-24 overflow-hidden max-w-7xl">
+      <img
+        src="assets/image1.png"
+        alt="Abstract representation of neurodiversity"
+        class="w-full object-cover h-48 md:h-72 lg:h-96"
+        onerror="this.onerror=null;this.src='https://placehold.co/1200x400/cccccc/333333?text=Image+Load+Error';"
+      />
+    </div>
+
+    <section class="py-12 rounded-lg mx-4 md:mx-auto max-w-6xl mt-8">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap justify-center items-end gap-8">
+          <div
+            class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex justify-center logo-item"
+          >
+            <img
+              src="assets/BC-Logo.svg"
+              alt="Partner Logo 1"
+              class="max-w-full h-auto rounded-md"
+              onerror="this.onerror=null;this.src='https://placehold.co/150x80/D1D5DB/4B5563?text=Logo+Placeholder';"
+            />
+          </div>
+          <div
+            class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex justify-center logo-item"
+          >
+            <img
+              src="assets/ARU-Logo.svg"
+              alt="Partner Logo 2"
+              class="max-w-full h-auto rounded-md"
+              onerror="this.onerror=null;this.src='https://placehold.co/150x80/D1D5DB/4B5563?text=Logo+Placeholder';"
+            />
+          </div>
+          <div
+            class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex justify-center logo-item"
+          >
+            <img
+              src="assets/SU-Logo.svg"
+              alt="Partner Logo 3"
+              class="max-w-full h-auto rounded-md"
+              onerror="this.onerror=null;this.src='https://placehold.co/150x80/D1D5DB/4B5563?text=Logo+Placeholder';"
+            />
+          </div>
+          <div
+            class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex justify-center logo-item"
+          >
+            <img
+              src="assets/TOU-Logo.svg"
+              alt="Partner Logo 4"
+              class="max-w-full h-auto rounded-md"
+              onerror="this.onerror=null;this.src='https://placehold.co/150x80/D1D5DB/4B5563?text=Logo+Placeholder';"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 md:py-32 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <div class="max-w-5xl mx-auto mb-8">
+          <h2
+            class="text-3xl md:text-3xl text-gray-800 font-bold mb-4"
+            data-key="about_us_title"
+          ></h2>
+          <p
+            class="text-xl md:text-2xl text-gray-600 leading-relaxed"
+            data-key="about_us_paragraph"
+          ></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 md:py-32 bg-gray-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 md:gap-x-16 lg:gap-x-24"
+        >
+          <h2
+            class="text-3xl md:text-4xl text-gray-800 max-w-sm"
+            data-key="introduction_title"
+          ></h2>
+          <div>
+            <p
+              class="text-base md:text-lg text-gray-600 max-w-2xl leading-relaxed text-justify"
+              data-lang-html="introduction_paragraph_1"
+            ></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mission" class="py-24 md:py-32">
+      <div class="px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+          <h2
+            class="text-center text-3xl md:text-4xl text-gray-800 mb-4"
+            data-key="mission_title"
+          ></h2>
+          <p
+            class="text-base md:text-lg text-gray-600 max-w-2xl leading-relaxed text-justify mx-auto mb-24"
+            data-key="mission_paragraph"
+          ></p>
+
+          <h2
+            class="text-center text-3xl md:text-4xl text-gray-800 mb-4"
+            data-key="objective_title"
+          ></h2>
+
+          <ul class="space-y-4 max-w-4xl mx-auto mb-24">
+            <li
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 text-gray-700 dark:text-gray-400 leading-relaxed"
+              data-key="objective_1"
+            >
+              Knowledge Exchange in pedagogy for Neurodiversity in Higher
+              Education (HE)
+            </li>
+
+            <li
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 text-gray-700 dark:text-gray-400 leading-relaxed"
+              data-key="objective_2"
+            >
+              Best Practice development following qualitative study on existing
+              policies, including those of Governments, own and partners'
+              institutions
+            </li>
+
+            <li
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 text-gray-700 dark:text-gray-400 leading-relaxed"
+              data-key="objective_3"
+            >
+              Model syllabi/curriculums comprising NIE inclusion; such as for
+              mechanical engineering modules (e.g., design, structure).
+            </li>
+
+            <li
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 text-gray-700 dark:text-gray-400 leading-relaxed"
+              data-key="objective_4"
+            >
+              Develop an "International Research and Network in
+              Neurodiverse-Inclusive Education" (IRNNIE) Group.
+            </li>
+          </ul>
+
+          <h2
+            class="text-left text-3xl md:text-3xl text-gray-800 mb-4"
+            data-key="sdgs_title"
+          ></h2>
+
+          <div class="flex flex-col md:flex-row gap-4 mb-24">
+            <a
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 flex-1"
+            >
+              <h2
+                class="text-base sm:text-xl font-semibold text-gray-800 dark:text-white mb-2"
+                data-key="goal3"
+              >
+                Goal 3
+              </h2>
+              <p
+                class="text-lg text-gray-700 dark:text-gray-400 leading-relaxed"
+                data-key="goal3_desc"
+              ></p>
+            </a>
+
+            <a
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 flex-1"
+            >
+              <h2
+                class="text-base sm:text-xl font-semibold text-gray-800 dark:text-white mb-2"
+                data-key="goal4"
+              ></h2>
+              <p
+                class="text-lg text-gray-700 dark:text-gray-400 leading-relaxed"
+                data-key="goal4_desc"
+              ></p>
+            </a>
+
+            <a
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 flex-1"
+            >
+              <h2
+                class="text-base sm:text-xl font-semibold text-gray-800 dark:text-white mb-2"
+                data-key="goal10"
+              ></h2>
+              <p
+                class="text-lg text-gray-700 dark:text-gray-400 leading-relaxed"
+                data-key="goal10_desc"
+              ></p>
+            </a>
+          </div>
+
+          <h2
+            class="text-center text-3xl md:text-3xl text-gray-800 mb-4"
+            data-key="who_we_serve_title"
+          ></h2>
+
+          <ul class="space-y-4 max-w-4xl mx-auto mb-24">
+            <li
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 text-gray-700 dark:text-gray-400 leading-relaxed"
+              data-key="who_we_serve_1"
+            ></li>
+
+            <li
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 text-gray-700 dark:text-gray-400 leading-relaxed"
+              data-key="who_we_serve_2"
+            ></li>
+
+            <li
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 text-gray-700 dark:text-gray-400 leading-relaxed"
+              data-key="who_we_serve_3"
+            ></li>
+
+            <li
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200 text-gray-700 dark:text-gray-400 leading-relaxed"
+              data-key="who_we_serve_4"
+            ></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="documentations" class="py-24 md:py-32 bg-gray-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 md:gap-x-16 lg:gap-x-24 mb-8"
+        >
+          <h2
+            class="text-3xl md:text-4xl text-gray-800 max-w-sm font-semibold"
+            data-key="documentation_report_title"
+          ></h2>
+
+          <p
+            class="text-base md:text-lg text-gray-600 max-w-2xl leading-relaxed text-justify"
+            \
+            data-key="documentation_report_paragraph_1"
+          ></p>
+        </div>
+        <div class="max-w-5xl mx-auto mb-8">
+          <img
+            src="assets/image3.JPEG"
+            alt="Header Image Description"
+            class="w-full"
+          />
+        </div>
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 md:gap-x-16 lg:gap-x-24 mb-44"
+        >
+          <h2 class="text-3xl md:text-4xl text-gray-800 max-w-sm font-semibold">
+            &nbsp;
+          </h2>
+
+          <p
+            class="text-base md:text-lg text-gray-600 max-w-2xl leading-relaxed text-justify"
+            data-lang-html="documentation_report_paragraph_2"
+          ></p>
+        </div>
+        <hr
+          class="max-w-5xl mx-auto border-t border-black dark:border-gray-600 my-8"
+        />
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 md:gap-x-16 lg:gap-x-24 mb-8"
+        >
+          <h2
+            class="text-3xl md:text-4xl text-gray-800 max-w-sm font-semibold"
+            data-lang-html="aru_event"
+          >
+            Anglia Ruskin University <br />
+            <span class="text-base font-light"> November 11-15, 2024</span>
+          </h2>
+
+          <h2
+            class="text-2xl md:text-3xl text-gray-600 max-w-2xl leading-relaxed"
+            data-key="aru_event_1_title"
+          ></h2>
+        </div>
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row items-start lg:gap-x-24 gap-y-4 mb-8"
+        >
+          <img
+            src="assets/image6.jpg"
+            alt="Image 4 Description"
+            class="w-full md:max-w-sm md:w-1/4"
+          />
+          <img
+            src="assets/image5.JPEG"
+            alt="Image 5 Description"
+            class="w-full md:max-w-2xl"
+          />
+        </div>
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 md:gap-x-16 lg:gap-x-24 mb-8"
+        >
+          <p
+            class="text-sm text-gray-600 max-w-3xl leading-relaxed"
+            data-key="aru_event_2_title"
+          >
+            ISPF Workshop Day, Helmore Building, ARU Cambridge, Tuesday,
+            November 12, 2024. We shared our knowledge and perspective regarding
+            neurodiversity, especially in higher education context.
+          </p>
+
+          <p
+            class="text-base text-gray-600 max-w-3xl leading-relaxed text-justify"
+            data-lang-html="aru_event_paragraph_1"
+          ></p>
+        </div>
+
+        <hr
+          class="max-w-5xl mx-auto border-t border-black dark:border-gray-600 my-8"
+        />
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 md:gap-x-16 lg:gap-x-24 mb-8"
+        >
+          <h2
+            class="text-3xl md:text-4xl text-gray-800 max-w-sm font-semibold"
+            data-lang-html="su_event"
+          ></h2>
+
+          <h2
+            class="text-2xl md:text-3xl text-gray-600 max-w-2xl leading-relaxed"
+            data-key="su_event_1_title"
+          ></h2>
+        </div>
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row items-start lg:gap-x-24 gap-y-4 mb-8"
+        >
+          <img
+            src="assets/image7.png"
+            alt="Image 4 Description"
+            class="w-full md:max-w-sm md:w-1/4"
+          />
+          <img
+            src="assets/image8.png"
+            alt="Image 5 Description"
+            class="w-full md:max-w-2xl"
+          />
+        </div>
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between md:gap-x-10 lg:gap-x-10 mb-8"
+        >
+          <p
+            class="text-sm text-gray-600 max-w-xs leading-relaxed"
+            data-key="su_event_2_title"
+          ></p>
+
+          <p
+            class="text-base text-gray-600 max-w-3xl leading-relaxed text-justify"
+            data-lang-html="su_event_paragraph_1"
+          ></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="members" class="py-24 md:py-32 bg-gray-50">
+      <div class="container px-4 sm:px-6 lg:px-8 mx-auto max-w-6xl">
+        <h2
+          class="text-left text-3xl md:text-4xl text-gray-800 max-w-sm font-semibold mb-4"
+          data-key="team_members_title"
+        ></h2>
+        <p
+          class="text-base md:text-lg text-gray-600 max-w-2xl leading-relaxed text-justify mb-12"
+          data-key="team_members_intro"
+        ></p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="bg-white shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
+          >
+            <div class="p-6 text-center">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2"
+                data-lang-html="team_member_sarinova_name"
+              ></h3>
+              <img
+                src="assets/sarinova.png"
+                alt="Member 1"
+                class="w-full h-80 object-cover mb-4"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/E5E7EB/4B5563?text=Image+Error';"
+              />
+              <p
+                class="text-gray-700 text-sm mb-1"
+                data-key="team_member_sarinova_role"
+              ></p>
+              <p
+                class="text-gray-700 text-xs mb-3"
+                data-key="team_member_sarinova_speciality"
+              ></p>
+              <a
+                href="mailto:john.doe@example.com"
+                class="text-blue-600 hover:text-blue-800 text-sm"
+                >sarinova.simanjuntak@aru.ac.uk</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
+          >
+            <div class="p-6 text-center">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2"
+                data-key="team_member_eka_name"
+              ></h3>
+              <img
+                src="assets/eka.png"
+                alt="Member 2"
+                class="w-full h-80 object-cover mb-4"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/E5E7EB/4B5563?text=Image+Error';"
+              />
+              <p
+                class="text-gray-700 text-sm mb-1"
+                data-key="team_member_eka_role"
+              ></p>
+              <p
+                class="text-gray-600 text-xs mb-3"
+                data-key="team_member_eka_speciality"
+              ></p>
+              <a
+                href="mailto:eka.budiartha@sampoernauniversity.ac.id"
+                class="text-blue-600 hover:text-blue-800 text-sm"
+              >
+                eka.budiartha@sampoernauniversity.ac.id</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
+          >
+            <div class="p-6 text-center">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2"
+                data-lang-html="team_member_ade_name"
+              ></h3>
+              <img
+                src="assets/ade.png"
+                alt="Member 3"
+                class="w-full h-80 object-cover mb-4"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/E5E7EB/4B5563?text=Image+Error';"
+              />
+              <p
+                class="text-gray-700 text-sm mb-1"
+                data-key="team_member_ade_role"
+              ></p>
+              <p
+                class="text-gray-600 text-xs mb-3"
+                data-key="team_member_ade_speciality"
+              ></p>
+              <a
+                href="mailto:ade.wicaksono@sampoernauniversity.ac.id"
+                class="text-blue-600 hover:text-blue-800 text-sm"
+                >ade.wicaksono@sampoernauniversity.ac.id</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
+          >
+            <div class="p-6 text-center">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2"
+                data-lang-html="team_member_poppy_name"
+              ></h3>
+              <img
+                src="assets/poppy.png"
+                alt="Member 4"
+                class="w-full h-80 object-cover mb-4"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/E5E7EB/4B5563?text=Image+Error';"
+              />
+              <p
+                class="text-gray-700 text-sm mb-1"
+                data-key="team_member_poppy_role"
+              ></p>
+              <p
+                class="text-gray-600 text-xs mb-3"
+                data-key="team_member_poppy_speciality"
+              ></p>
+              <a
+                href="mailto:poppy.gibson@open.ac.uk"
+                class="text-blue-600 hover:text-blue-800 text-sm"
+                >poppy.gibson@open.ac.uk</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
+          >
+            <div class="p-6 text-center">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2"
+                data-key="team_member_wira_name"
+              ></h3>
+              <img
+                src="assets/agung.png"
+                alt="Member 5"
+                class="w-full h-80 object-cover mb-4"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/E5E7EB/4B5563?text=Image+Error';"
+              />
+              <p
+                class="text-gray-700 text-sm mb-1"
+                data-key="team_member_wira_role"
+              ></p>
+              <p
+                class="text-gray-600 text-xs mb-3"
+                data-key="team_member_wira_speciality"
+              ></p>
+              <a
+                href="mailto:wira.redi@sampoernauniversity.ac.id"
+                class="text-blue-600 hover:text-blue-800 text-sm"
+                >wira.redi@sampoernauniversity.ac.id</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
+          >
+            <div class="p-6 text-center">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2"
+                data-lang-html="team_member_herdiana_name"
+              ></h3>
+              <img
+                src="assets/herdiana.png"
+                alt="Member 6"
+                class="w-full h-80 object-cover mb-4"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/E5E7EB/4B5563?text=Image+Error';"
+              />
+              <p
+                class="text-gray-700 text-sm mb-1"
+                data-key="team_member_herdiana_role"
+              ></p>
+              <p
+                class="text-gray-600 text-xs mb-3"
+                data-key="team_member_herdiana_speciality"
+              ></p>
+              <a
+                href="mailto:sarah.davis@example.com"
+                class="text-blue-600 hover:text-blue-800 text-sm"
+                >herdiana.hakim@sampoernauniversity.ac.id</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
+          >
+            <div class="p-6 text-center">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2"
+                data-lang-html="team_member_sarah_name"
+              ></h3>
+              <img
+                src="assets/sarah.png"
+                alt="Member 7"
+                class="w-full h-80 object-cover mb-4"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/E5E7EB/4B5563?text=Image+Error';"
+              />
+              <p
+                class="text-gray-700 text-sm mb-1"
+                data-key="team_member_sarah_role"
+              ></p>
+              <p
+                class="text-gray-600 text-xs mb-3"
+                data-key="team_member_sarah_speciality"
+              ></p>
+              <a
+                href="mailto:sarah.wall@aru.ac.uk"
+                class="text-blue-600 hover:text-blue-800 text-sm"
+                >sarah.wall@aru.ac.uk</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="bg-white shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
+          >
+            <div class="p-6 text-center">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2"
+                data-lang-html="team_member_arkhadi_name"
+              ></h3>
+              <img
+                src="assets/arkha.png"
+                alt="Member 8"
+                class="w-full h-80 object-cover mb-4"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/E5E7EB/4B5563?text=Image+Error';"
+              />
+              <p
+                class="text-gray-700 text-sm mb-1"
+                data-key="team_member_arkhadi_role"
+              ></p>
+              <p
+                class="text-gray-600 text-xs mb-3"
+                data-key="team_member_arkhadi_speciality"
+              ></p>
+              <a
+                href="mailto:olivia.taylor@example.com"
+                class="text-blue-600 hover:text-blue-800 text-sm"
+                >arkhadi.pustaka@sampoernauniversity.ac.id</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ["Inter", "sans-serif"],
+              },
+            },
+          },
+        };
+      </script>
+    </section>
+
+    <section id="publication" class="py-24 md:py-32 bg-gray-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 md:gap-x-16 lg:gap-x-24 mb-8"
+        >
+          <h2
+            class="text-3xl md:text-4xl text-gray-800 max-w-sm font-semibold"
+            data-key="publication_title"
+          ></h2>
+        </div>
+        <div class="max-w-5xl mx-auto mb-8">
+          <p
+            class="mb-4 text-left md:text-justify"
+            data-key="publication_desc"
+          ></p>
+        </div>
+        <div class="max-w-5xl mx-auto mb-8">
+          <a
+            href="https://nexus-education.com/blog-posts/supporting-neurodivergence-from-england-to-indonesia/#"
+            target="_blank"
+            ><img
+              src="assets/publication.png"
+              alt="Header Image Description"
+              class="w-full transform transition duration-300 hover:scale-105"
+          /></a>
+        </div>
+        <div>
+          <p class="list-disc pl-5"></p>
+        </div>
+        <div
+          class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 md:gap-x-16 lg:gap-x-24 mb-8"
+        >
+          <h2 class="text-3xl md:text-4xl text-gray-800 max-w-sm font-semibold">
+            &nbsp
+          </h2>
+
+          <div
+            class="text-base md:text-lg text-gray-600 max-w-2xl leading-relaxed text-left"
+          >
+            <p class="mb-4" data-key="publication_another_title"></p>
+            <ul class="list-disc pl-5">
+              <li data-key="publication_1"></li>
+              <li data-key="publication_2"></li>
+              <li data-key="publication_3"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-sm" data-key="copyright"></p>
+      </div>
+    </footer>
+
+    <script src="language-switcher.js"></script>
+  </body>
+</html>

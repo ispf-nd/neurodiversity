@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-lang-title="title">Neurodiversity - ISPF</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom font family for the body */
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      /* Base styles for myth-reality: hidden by default with smooth transition */
+      .myth-reality {
+        max-height: 0; /* Initially hidden */
+        opacity: 0; /* Initially transparent */
+        overflow: hidden; /* Hide overflowing content */
+        transition: max-height 0.5s ease-out, opacity 0.5s ease-out,
+          padding-top 0.5s ease-out; /* Smooth transition for reveal */
+        padding-top: 0; /* No padding when hidden */
+      }
+
+      /* Desktop hover effect (for screens wider than 768px, i.e., md breakpoint and up) */
+      @media (min-width: 768px) {
+        .myth-card:hover .myth-reality {
+          max-height: 200px; /* Sufficiently large height to reveal content */
+          opacity: 1; /* Fully visible */
+          padding-top: 0.5rem; /* mt-2 equivalent from original HTML */
+        }
+      }
+
+      /* Mobile tap effect (using a class toggled by JavaScript) */
+      /* This class is applied when the card is tapped on touch devices or small screens */
+      .myth-card.is-revealed .myth-reality {
+        max-height: 200px; /* Sufficiently large height to reveal content */
+        opacity: 1; /* Fully visible */
+        padding-top: 0.5rem; /* mt-2 equivalent from original HTML */
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-900">
+    <nav class="fixed top-0 w-full z-10 bg-white shadow-md rounded-b-lg">
+      <div
+        class="container mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center"
+      >
+        <div>
+          <a
+            href="index.html"
+            class="block text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300 rounded-md p-2 whitespace-nowrap"
+            data-key="ispf"
+          >
+            ispf
+          </a>
+        </div>
+
+        <ul class="hidden md:flex space-x-8">
+          <li>
+            <a
+              href="#best-practices"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200 whitespace-nowrap"
+              data-key="nav_best_practices"
+              >Best Practices</a
+            >
+          </li>
+          <li>
+            <a
+              href="#misconceptions"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200 whitespace-nowrap"
+              data-key="nav_misconceptions"
+              >Misconceptions</a
+            >
+          </li>
+          <li>
+            <a
+              href="#takeaways"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200 whitespace-nowrap"
+              data-key="nav_takeaways"
+              >Takeaways</a
+            >
+          </li>
+          <li>
+            <a
+              href="aboutus.html"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200 whitespace-nowrap"
+              data-key="nav_about_us"
+              >About Us</a
+            >
+          </li>
+        </ul>
+
+        <div class="flex items-center space-x-4">
+          <button
+            id="mobile-menu-button"
+            class="md:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            aria-label="Toggle mobile menu"
+          >
+            <svg
+              class="w-6 h-6 text-gray-700"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+          <div
+            id="languageSwitcher"
+            class="w-12 h-12 bg-white text-black flex items-center justify-center rounded-full cursor-pointer transition-colors duration-300 shadow-sm hover:shadow-md"
+          >
+            <span id="languageText" class="font-semibold">ID</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white shadow-lg rounded-b-lg py-2"
+      >
+        <ul class="flex flex-col items-center space-y-2 px-4">
+          <li>
+            <a
+              href="#best-practices"
+              class="block w-full text-center py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md whitespace-nowrap"
+              data-key="nav_best_practices"
+              >Best Practices</a
+            >
+          </li>
+          <li>
+            <a
+              href="#misconceptions"
+              class="block w-full text-center py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md whitespace-nowrap"
+              data-key="nav_misconceptions"
+              >Misconceptions</a
+            >
+          </li>
+          <li>
+            <a
+              href="#takeaways"
+              class="block w-full text-center py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md whitespace-nowrap"
+              data-key="nav_takeaways"
+              >Takeaways</a
+            >
+          </li>
+          <li>
+            <a
+              href="aboutus.html"
+              class="block w-full text-center py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md whitespace-nowrap"
+              data-key="nav_about_us"
+              >About Us</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="pt-32 md:py-32 lg:py-48 md:pt-0 left-52">
+      <div
+        class="container mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left"
+      >
+        <h1
+          class="text-4xl md:text-4xl lg:text-6xl font-bold max-w-4xl mx-auto mb-8 md:mb-12 leading-tight"
+          data-key="hero_headline"
+        >
+          Learning to Appreciate the Mind Not Forcing It to Conform
+        </h1>
+        <div
+          class="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-6 md:gap-12 mb-8 md:mb-56"
+        >
+          <a
+            href="#typology"
+            class="inline-block bg-black text-white px-8 py-4 rounded-full hover:bg-gray-300 hover:shadow-lg transition-all duration-300 text-lg font-medium"
+            data-key="hero_learn_more"
+            >Learn More</a
+          >
+        </div>
+
+        <div
+          class="max-w-4xl mx-auto text-right md:text-right text-sm text-gray-600 mt-8 md:mt-12"
+        >
+          <p class="font-semibold mb-1" data-key="hero_collaboration_intro">
+            In collaboration of
+          </p>
+          <p
+            class="hover:text-blue-600 transition-colors duration-200"
+            data-key="hero_british_council"
+          >
+            British Council
+          </p>
+          <p
+            class="hover:text-blue-600 transition-colors duration-200"
+            data-key="hero_anglia_ruskin"
+          >
+            Anglia Ruskin University
+          </p>
+          <p
+            class="hover:text-blue-600 transition-colors duration-200"
+            data-key="hero_sampoerna_university"
+          >
+            Sampoerna University
+          </p>
+          <p
+            class="hover:text-blue-600 transition-colors duration-200"
+            data-key="hero_open_university"
+          >
+            The Open University
+          </p>
+        </div>
+
+        <div class="mt-12 md:mt-16 w-full max-w-4xl mx-auto aspect-video">
+          <iframe
+            id="youtube-player"
+            class="w-full h-full rounded-xl shadow-lg"
+            src=""
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay;"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 md:py-32 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <div
+          class="max-w-5xl mx-auto mb-12 flex flex-col md:flex-row justify-between items-start md:items-start gap-8 md:gap-x-16 lg:gap-x-24"
+        >
+          <h2
+            class="text-3xl md:text-4xl text-gray-800 font-bold max-w-sm"
+            data-key="what_is_neurodiversity_title"
+          ></h2>
+          <p
+            class="text-lg md:text-2xl text-gray-600 max-w-2xl"
+            data-lang-html="what_is_neurodiversity_text"
+          ></p>
+        </div>
+        <div
+          class="max-w-5xl mx-auto mb-24 flex flex-col lg:flex-row justify-end items-center lg:items-start gap-12"
+        >
+          <div class="hidden lg:block w-full lg:w-1/2"></div>
+          <a
+            class="block w-full max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200"
+          >
+            <p
+              class="font-normal text-gray-700 dark:text-gray-400 mb-4 text-base"
+              data-key="survey_result"
+            >
+              Survey Result
+            </p>
+            <h5
+              class="mb-8 text-7xl md:text-8xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="survey_percentage"
+            >
+              51%
+            </h5>
+            <p
+              class="font-normal text-gray-700 dark:text-gray-400 text-sm"
+              data-key="survey_text"
+            ></p>
+          </a>
+        </div>
+
+        <div id="typology" class="max-w-5xl mx-auto mb-16">
+          <h2
+            class="text-3xl md:text-4xl text-gray-800 font-bold text-left mb-8"
+            data-key="some_typology_title"
+          ></h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <div
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200"
+            >
+              <h3
+                class="mb-6 mt-2 text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
+                data-key="asd_title"
+              ></h3>
+              <p
+                class="font-normal text-gray-700 dark:text-gray-400 text-sm leading-relaxed"
+                data-key="asd_text"
+              ></p>
+            </div>
+            <div
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200"
+            >
+              <h3
+                class="mb-6 mt-2 text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
+                data-key="adhd_title"
+              ></h3>
+              <p
+                class="font-normal text-gray-700 dark:text-gray-400 text-sm leading-relaxed"
+                data-key="adhd_text"
+              ></p>
+            </div>
+            <div
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200"
+            >
+              <h3
+                class="mb-6 mt-2 text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
+                data-key="dyslexia_title"
+              >
+                Dyslexia
+              </h3>
+              <p
+                class="font-normal text-gray-700 dark:text-gray-400 text-sm leading-relaxed"
+                data-key="dyslexia_text"
+              ></p>
+            </div>
+            <div
+              class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200"
+            >
+              <h3
+                class="mb-6 mt-2 text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
+                data-key="tourette_title"
+              ></h3>
+              <p
+                class="font-normal text-gray-700 dark:text-gray-400 text-sm leading-relaxed"
+                data-key="tourette_text"
+              ></p>
+            </div>
+          </div>
+        </div>
+        <div class="max-w-5xl mx-auto mb-24 md:mb-32">
+          <p
+            class="text-sm md:text-base text-gray-600 text-left leading-relaxed"
+            data-key="more_typology_info"
+          ></p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="misconceptions"
+      class="py-24 md:py-32 bg-gray-100 scroll-mt-24"
+    >
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <div
+          class="max-w-5xl mx-auto mb-12 flex flex-col md:flex-row justify-between items-start md:items-start gap-8"
+        >
+          <h2
+            class="text-3xl md:text-4xl text-gray-800 font-bold max-w-sm"
+            data-key="misconception_section_title"
+          >
+            Misconception
+          </h2>
+          <p
+            class="text-lg md:text-xl text-gray-600 max-w-2xl"
+            data-lang-html="misconception_intro"
+          ></p>
+        </div>
+
+        <div
+          class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24 md:mb-32 items-start"
+        >
+          <div
+            class="myth-card block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer transition-all duration-200"
+          >
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="myth_1_title"
+            ></h5>
+            <div
+              class="myth-statement text-gray-700 dark:text-gray-400 text-base"
+            >
+              <p data-key="myth_1_statement"></p>
+            </div>
+            <div class="myth-reality text-gray-700 dark:text-gray-400 text-sm">
+              <p class="mt-2" data-key="myth_1_reality"></p>
+            </div>
+          </div>
+
+          <div
+            class="myth-card block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer transition-all duration-200"
+          >
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="myth_2_title"
+            >
+              Myth 2
+            </h5>
+            <div
+              class="myth-statement text-gray-700 dark:text-gray-400 text-base"
+            >
+              <p data-key="myth_2_statement"></p>
+            </div>
+            <div class="myth-reality text-gray-700 dark:text-gray-400 text-sm">
+              <p class="mt-2" data-key="myth_2_reality"></p>
+            </div>
+          </div>
+
+          <div
+            class="myth-card block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer transition-all duration-200"
+          >
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="myth_3_title"
+            >
+              Myth 3
+            </h5>
+            <div
+              class="myth-statement text-gray-700 dark:text-gray-400 text-base"
+            >
+              <p data-key="myth_3_statement"></p>
+            </div>
+            <div class="myth-reality text-gray-700 dark:text-gray-400 text-sm">
+              <p class="mt-2" data-key="myth_3_reality"></p>
+            </div>
+          </div>
+
+          <div
+            class="myth-card block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer transition-all duration-200"
+          >
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="myth_4_title"
+            >
+              Myth 4
+            </h5>
+            <div
+              class="myth-statement text-gray-700 dark:text-gray-400 text-base"
+            >
+              <p data-key="myth_4_statement"></p>
+            </div>
+            <div class="myth-reality text-gray-700 dark:text-gray-400 text-sm">
+              <p class="mt-2" data-key="myth_4_reality"></p>
+            </div>
+          </div>
+
+          <div
+            class="myth-card block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer transition-all duration-200"
+          >
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="myth_5_title"
+            >
+              Myth 5
+            </h5>
+            <div
+              class="myth-statement text-gray-700 dark:text-gray-400 text-base"
+            >
+              <p data-key="myth_5_statement">
+                “Neurodivergent people lack empathy.”
+              </p>
+            </div>
+            <div class="myth-reality text-gray-700 dark:text-gray-400 text-sm">
+              <p class="mt-2" data-key="myth_5_reality"></p>
+            </div>
+          </div>
+
+          <div
+            class="myth-card block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer transition-all duration-200"
+          >
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="myth_6_title"
+            >
+              Myth 6
+            </h5>
+            <div
+              class="myth-statement text-gray-700 dark:text-gray-400 text-base"
+            >
+              <p data-key="myth_6_statement">“Only boys are neurodivergent.”</p>
+            </div>
+            <div class="myth-reality text-gray-700 dark:text-gray-400 text-sm">
+              <p class="mt-2" data-key="myth_6_reality">
+                Truth: Girls/women are underdiagnosed due to masking (copying
+                social behaviors) or stereotypes (e.g., ADHD in girls labeled as
+                "daydreaming")
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="myth-card block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer transition-all duration-200"
+          >
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="myth_7_title"
+            >
+              Myth 7
+            </h5>
+            <div
+              class="myth-statement text-gray-700 dark:text-gray-400 text-base"
+            >
+              <p data-key="myth_7_statement">
+                “Neurodivergent people can’t succeed in school or careers.”
+              </p>
+            </div>
+            <div class="myth-reality text-gray-700 dark:text-gray-400 text-sm">
+              <p class="mt-2" data-key="myth_7_reality">
+                Truth: With accommodations (e.g., flexible deadlines, quiet
+                workspaces), they excel. Many innovators (Daniel Radcliffe,
+                Temple Grandin) are neurodivergent.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="myth-card block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer transition-all duration-200"
+          >
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="myth_8_title"
+            >
+              Myth 8
+            </h5>
+            <div
+              class="myth-statement text-gray-700 dark:text-gray-400 text-base"
+            >
+              <p data-key="myth_8_statement">
+                “Stimming (e.g., rocking, hand-flapping) is bad behavior.”
+              </p>
+            </div>
+            <div class="myth-reality text-gray-700 dark:text-gray-400 text-sm">
+              <p class="mt-2" data-key="myth_8_reality">
+                Truth: Stimming regulates emotions and sensory input.
+                Suppressing it can cause distress.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="myth-card block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer transition-all duration-200"
+          >
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="myth_9_title"
+            >
+              Myth 9
+            </h5>
+            <div
+              class="myth-statement text-gray-700 dark:text-gray-400 text-base"
+            >
+              <p data-key="myth_9_statement">
+                “They don’t want friends—they prefer to be alone.”
+              </p>
+            </div>
+            <div class="myth-reality text-gray-700 dark:text-gray-400 text-sm">
+              <p class="mt-2" data-key="myth_9_reality">
+                Truth: Many crave connection but struggle with social norms.
+                Inclusive environments help them build relationships.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const mythCards = document.querySelectorAll(".myth-card");
+
+        // Function to determine if the device is likely a touch device or a small screen
+        // This helps apply tap behavior on mobile and hover on desktop
+        function isTouchOrSmallScreen() {
+          // Check for touch events support or if the screen width is less than the md breakpoint (768px)
+          return (
+            "ontouchstart" in window ||
+            navigator.maxTouchPoints > 0 ||
+            navigator.msMaxTouchPoints > 0 ||
+            window.innerWidth < 768
+          );
+        }
+
+        mythCards.forEach((card) => {
+          card.addEventListener("click", function () {
+            // Only apply the tap toggle logic if it's a touch device or a small screen
+            if (isTouchOrSmallScreen()) {
+              // Toggle the 'is-revealed' class on the clicked card
+              // This class controls the visibility of .myth-reality via CSS
+              this.classList.toggle("is-revealed");
+            }
+            // For desktop (non-touch and larger screens), the CSS :hover pseudo-class
+            // will automatically handle the reveal, so no JavaScript action is needed here.
+          });
+        });
+      });
+    </script>
+
+    <section id="takeaways" class="py-24 md:py-32 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <div class="max-w-5xl mx-auto mb-8">
+          <h2
+            class="text-3xl md:text-3xl text-gray-800 font-bold mb-4"
+            data-key="takeaways_section_title"
+          >
+            Takeaways
+          </h2>
+          <p
+            class="text-xl md:text-2xl text-gray-600 leading-relaxed"
+            data-lang-html="takeaways_question"
+          >
+            <span class="font-semibold">Is neurodiversity a disability?</span>
+            <span
+              class="text-gray-500 hover:text-gray-700 transition-colors duration-200"
+            >
+              No, it is not a disability. Rather, it represents the unique
+              cognitive process on how a person understanding their world.
+            </span>
+          </p>
+        </div>
+        <div class="max-w-5xl mx-auto mb-12">
+          <p
+            class="text-lg text-gray-700"
+            data-key="takeaways_suggestions_intro"
+          >
+            Here are some suggestions of what we should do regarding
+            neurodiversity:
+          </p>
+        </div>
+        <div
+          class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-1 gap-6 mb-16 md:mb-24"
+        >
+          <a
+            class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200"
+          >
+            <h5
+              class="mb-8 mt-4 text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="understand_card_title"
+            >
+              Understand
+            </h5>
+            <p
+              class="font-normal text-gray-700 dark:text-gray-400 text-sm leading-relaxed"
+              data-key="understand_card_text"
+            ></p>
+          </a>
+          <a
+            class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200"
+          >
+            <h5
+              class="mb-8 mt-4 text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="support_card_title"
+            >
+              Support
+            </h5>
+            <p
+              class="font-normal text-gray-700 dark:text-gray-400 text-sm leading-relaxed"
+              data-key="support_card_text"
+            ></p>
+          </a>
+          <a
+            class="block p-6 bg-white border border-gray-200 rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-200"
+          >
+            <h5
+              class="mb-8 mt-4 text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white"
+              data-key="empower_card_title"
+            >
+              Empower
+            </h5>
+            <p
+              class="font-normal text-gray-700 dark:text-gray-400 text-sm leading-relaxed"
+              data-key="empower_card_text"
+            ></p>
+          </a>
+        </div>
+        <h1
+          class="text-xl md:text-3xl font-bold text-center mb-24 md:mb-32 max-w-3xl mx-auto leading-normal"
+          data-key="takeaways_closing_statement"
+        ></h1>
+      </div>
+    </section>
+
+    <section id="best-practices" class="py-16 md:py-24 bg-gray-100">
+      <!-- Container for content -->
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Main flex container: stacks on mobile, row on desktop -->
+        <div
+          class="max-w-6xl mx-auto flex flex-col lg:flex-row justify-between gap-8 lg:gap-16"
+        >
+          <!-- Left Column: Section Title -->
+          <!-- The title column shrinks to fit its content and has a max-width -->
+          <div class="lg:w-1/3 flex-shrink-0">
+            <h2
+              class="text-3xl md:text-4xl text-gray-900 font-bold"
+              data-key="best_practices_section_title"
+            >
+              Best Practices for Success
+            </h2>
+          </div>
+
+          <!-- Right Column: Content (Intro, List, Video, Buttons) -->
+          <!-- This column takes up the remaining space -->
+          <div class="lg:w-2/3">
+            <p
+              class="text-base md:text-lg text-gray-600 max-w-3xl leading-relaxed mb-8"
+              data-lang-html="best_practices_intro_text"
+            >
+              To ensure the best results and a smooth workflow, we recommend
+              following these established guidelines. They are designed to
+              improve clarity, efficiency, and the overall quality of the final
+              outcome.
+            </p>
+
+            <div class="relative w-full aspect-[4/3]">
+              <iframe
+                src="https://scratch.mit.edu/projects/1198174369/embed"
+                allowtransparency="true"
+                allowfullscreen
+                frameborder="0"
+                scrolling="no"
+                class="absolute top-0 left-0 w-full h-full"
+              ></iframe>
+            </div>
+
+            <!-- Ordered List with proper spacing -->
+            <!-- Replaced <br> tags with margin-bottom on list items for better semantics and control -->
+            <ol
+              class="list-decimal list-inside text-base md:text-lg text-gray-600 max-w-3xl leading-relaxed space-y-4 mb-8"
+              data-key="practices_list"
+            >
+              <li data-key="bp_list_item_1">
+                Always start with a clear and concise plan.
+              </li>
+              <li data-key="bp_list_item_2">
+                Maintain consistent communication with all stakeholders.
+              </li>
+              <li data-key="bp_list_item_3">
+                Document every step of the process for future reference.
+              </li>
+              <li data-key="bp_list_item_4">
+                Regularly test and iterate on your work.
+              </li>
+              <li data-key="bp_list_item_5">
+                Prioritize accessibility and user experience in all designs.
+              </li>
+              <li data-key="bp_list_item_6">
+                Seek feedback early and often to avoid major revisions later.
+              </li>
+            </ol>
+
+            <!-- Responsive YouTube Video Embed -->
+            <!-- The `aspect-video` class maintains a 16:9 ratio. This is a more modern approach than the old aspect-ratio plugin. -->
+            <iframe
+              class="w-full aspect-video my-8 rounded-lg shadow-lg"
+              src="https://www.youtube.com/embed/wUJT754_Uxk"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+
+            <!-- Responsive Button Grid -->
+            <!-- Stacks to 1 column on mobile (`grid-cols-1`) -->
+            <!-- Becomes a 2-column grid on small screens and up (`sm:grid-cols-2`) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+              <a
+                href="representation.html"
+                target="_blank"
+                class="text-center bg-gray-200 text-gray-800 px-6 py-3 rounded-full hover:bg-gray-300 hover:shadow-lg transition-all duration-300 font-medium"
+                data-key="representation_link"
+              >
+                View Representation
+              </a>
+              <a
+                href="https://drive.google.com/file/d/1xcDIhb6OZm4JLu_42QHTw313kW1zGOSK/view?usp=sharing"
+                target="_blank"
+                class="text-center bg-gray-200 text-gray-800 px-6 py-3 rounded-full hover:bg-gray-300 hover:shadow-lg transition-all duration-300 font-medium"
+                data-key="module_link"
+              >
+                Download Module
+              </a>
+              <a
+                href="aboutus.html"
+                target="_blank"
+                class="text-center bg-gray-200 text-gray-800 px-6 py-3 rounded-full hover:bg-gray-300 hover:shadow-lg transition-all duration-300 font-medium"
+                data-key="nav_about_us"
+              >
+                About Us
+              </a>
+              <a
+                href="network.html"
+                target="_blank"
+                class="text-center bg-gray-200 text-gray-800 px-6 py-3 rounded-full hover:bg-gray-300 hover:shadow-lg transition-all duration-300 font-medium"
+                data-key="nav_network"
+              >
+                Our Network
+              </a>
+              <a
+                href="https://drive.google.com/file/d/17XXBki4zN-B4gef9RUgjV7sTw7WZ_38U/view?usp=drivesdk"
+                target="_blank"
+                class="text-center bg-gray-200 text-gray-800 px-6 py-3 rounded-full hover:bg-gray-300 hover:shadow-lg transition-all duration-300 font-medium"
+                data-key="nav_policy"
+              >
+                Policy
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-sm" data-key="copyright">
+          © 2024 ispf. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script src="language-switcher.js"></script>
+  </body>
+</html>

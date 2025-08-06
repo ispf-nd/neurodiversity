@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neurodiversity Representation</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom font family for the body */
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      /* Responsive Table Styles for screens smaller than 768px */
+      @media (max-width: 767px) {
+        /* Hide the original table header */
+        .responsive-table thead {
+          display: none;
+        }
+
+        /* Make table elements block-level */
+        .responsive-table table,
+        .responsive-table tbody,
+        .responsive-table tr,
+        .responsive-table td {
+          display: block;
+        }
+
+        /* Style each row as a card */
+        .responsive-table tr {
+          background-color: #ffffff;
+          border: 1px solid #e5e7eb; /* gray-200 */
+          border-radius: 0.75rem; /* rounded-lg */
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-md */
+          margin-bottom: 1.5rem;
+          padding: 1.25rem; /* p-5 */
+          overflow: hidden;
+        }
+
+        .responsive-table td {
+          border: none;
+          padding: 0;
+        }
+
+        /* --- Specific styles for the TRACE table cards --- */
+        #trace .responsive-table tr {
+          display: grid;
+          grid-template-areas:
+            "letter item"
+            "letter description";
+          grid-template-columns: auto 1fr;
+          gap: 0.25rem 1rem;
+          align-items: center; /* <<< This is the corrected line */
+        }
+
+        #trace .responsive-table td:nth-child(1) {
+          grid-area: letter;
+          font-size: 2.25rem; /* text-4xl */
+          font-weight: 800; /* extrabold */
+          color: #3b82f6; /* blue-500 */
+        }
+
+        #trace .responsive-table td:nth-child(2) {
+          grid-area: item;
+          font-size: 1.125rem; /* text-lg */
+          font-weight: 700;
+          color: #1f2937; /* gray-800 */
+        }
+
+        #trace .responsive-table td:nth-child(3) {
+          grid-area: description;
+          color: #4b5563; /* gray-600 */
+        }
+
+        /* --- Specific styles for the RESOURCES table cards --- */
+        #resources .responsive-table td[data-label="No"] {
+          display: none; /* Hide the number column on mobile */
+        }
+
+        #resources .responsive-table td {
+          padding: 0.5rem 0;
+        }
+
+        /* Add a separator between fields */
+        #resources .responsive-table td:not(:last-child) {
+          border-bottom: 1px solid #f3f4f6; /* gray-100 */
+        }
+
+        /* Style the 'Resource' name as the card title */
+        #resources .responsive-table td[data-label="Resource"] {
+          font-size: 1.125rem; /* text-lg */
+          font-weight: 700;
+          color: #1f2937; /* gray-800 */
+          padding-bottom: 0.75rem;
+        }
+
+        /* For other fields, use a label-value format */
+        #resources
+          .responsive-table
+          td[data-label]:not([data-label="Resource"])::before {
+          content: attr(data-label);
+          display: block;
+          font-weight: 600;
+          color: #4b5563; /* gray-600 */
+          font-size: 0.875rem; /* text-sm */
+          margin-bottom: 0.25rem;
+        }
+
+        /* Hide the label for the main title cell itself */
+        #resources .responsive-table td[data-label="Resource"]::before {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-900">
+    <nav class="fixed top-0 w-full z-10 bg-white shadow-md rounded-b-lg">
+      <div
+        class="container mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center"
+      >
+        <div class="text-2xl font-bold text-gray-800">
+          <a
+            href="index.html"
+            class="flex items-center text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300 rounded-md p-2"
+          >
+            <img src="assets/home.svg" alt="Home" class="w-6 h-6 mr-2" />
+            ispf
+          </a>
+        </div>
+
+        <ul class="hidden md:flex space-x-8">
+          <li>
+            <a
+              href="#representation"
+              data-key="nav_rep"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200"
+            ></a>
+          </li>
+          <li>
+            <a
+              href="#key"
+              data-key="nav_key"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200"
+            ></a>
+          </li>
+          <li>
+            <a
+              href="#resources"
+              data-key="nav_res"
+              class="text-gray-700 hover:text-gray-900 transition-colors duration-200"
+            ></a>
+          </li>
+        </ul>
+
+        <div class="flex items-center space-x-4">
+          <button
+            id="mobile-menu-button"
+            class="md:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            aria-label="Toggle mobile menu"
+          >
+            <svg
+              class="w-6 h-6 text-gray-700"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+          <div
+            id="languageSwitcher"
+            class="w-12 h-12 bg-white text-black flex items-center justify-center rounded-full cursor-pointer transition-colors duration-300 shadow-sm hover:shadow-md"
+            aria-label="Switch language"
+          >
+            <span id="languageText" class="font-semibold">ID</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white shadow-lg rounded-b-lg py-2"
+      >
+        <ul class="flex flex-col items-center space-y-2 px-4">
+          <li>
+            <a
+              href="#representation"
+              class="block w-full text-center py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md"
+              data-key="nav_rep"
+            ></a>
+          </li>
+          <li>
+            <a
+              href="#key"
+              class="block w-full text-center py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md"
+              data-key="nav_key"
+            ></a>
+          </li>
+          <li>
+            <a
+              href="#resources"
+              class="block w-full text-center py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md"
+              data-key="nav_res"
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="mx-4 md:mx-auto w-full mt-24 overflow-hidden max-w-7xl">
+      <img
+        src="assets/image2.png"
+        alt="Abstract representation of neurodiversity"
+        class="w-full object-cover h-48 md:h-72 lg:h-96"
+        onerror="this.onerror=null;this.src='https://placehold.co/1200x400/cccccc/333333?text=Image+Load+Error';"
+      />
+    </div>
+
+    <section class="py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <div class="max-w-5xl mx-auto">
+          <h2
+            class="text-3xl md:text-4xl text-gray-800 font-bold mb-6"
+            data-key="representation_title"
+          >
+            Representation
+          </h2>
+          <p
+            class="text-lg text-gray-700 leading-relaxed mb-4"
+            data-key="representation_desc_1"
+          ></p>
+          <p
+            class="text-lg text-gray-700 leading-relaxed mb-4"
+            data-key="representation_desc_2"
+          ></p>
+          <p
+            class="text-lg text-gray-700 leading-relaxed"
+            data-key="representation_desc_3"
+          ></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="representation" class="py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <div class="max-w-5xl mx-auto">
+          <h2
+            class="text-3xl md:text-4xl text-gray-800 font-bold mb-6 max-w-lg"
+            data-key="examine_title"
+          ></h2>
+          <p
+            class="text-lg text-gray-700 leading-relaxed mb-8"
+            data-key="examine_desc"
+          ></p>
+          <ol
+            class="list-decimal pl-8 max-w-3xl space-y-6 text-lg text-gray-700"
+          >
+            <li data-lang-html="examine_list_1"></li>
+            <li data-lang-html="examine_list_2"></li>
+            <li data-lang-html="examine_list_3"></li>
+            <li data-lang-html="examine_list_4"></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="key" class="py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+        <section id="key-questions">
+          <div class="flex justify-start lg:justify-end mb-16">
+            <div class="max-w-5xl lg:max-w-3xl">
+              <h2
+                class="text-3xl md:text-4xl text-gray-800 font-bold mb-6 max-w-lg"
+                data-key="key_title"
+              ></h2>
+              <p
+                class="text-lg text-gray-700 leading-relaxed mb-8"
+                data-key="key_desc"
+              ></p>
+              <ol
+                class="list-decimal pl-8 max-w-3xl space-y-6 text-lg text-gray-700"
+              >
+                <li data-key="key_list_1"></li>
+                <li data-key="key_list_2"></li>
+                <li data-key="key_list_3"></li>
+                <li data-key="key_list_4"></li>
+                <li data-lang-html="key_list_5"></li>
+                <li data-key="key_list_6"></li>
+                <li data-key="key_list_7"></li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section id="trace">
+          <div class="max-w-7xl mx-auto" d>
+            <p
+              class="text-lg text-gray-700 leading-relaxed mb-8"
+              data-lang-html="trace_desc"
+            ></p>
+          </div>
+          <div
+            class="responsive-table relative overflow-x-auto max-w-7xl mx-auto rounded-lg mb-14"
+          >
+            <table
+              class="w-full text-sm text-left rtl:text-right text-gray-600 dark:text-gray-400"
+            >
+              <thead
+                class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
+              >
+                <tr class="rounded-lg">
+                  <th
+                    scope="col"
+                    colspan="3"
+                    class="px-6 py-3 text-center rounded-t-lg"
+                    data-key="trace_head"
+                  >
+                    TRACE: A Framework for Analyzing Representation
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <td
+                    class="px-6 py-4 align-top font-bold text-gray-900"
+                    data-label="T"
+                  >
+                    T
+                  </td>
+                  <td
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-normal align-top"
+                    data-label="Item"
+                    data-key="tropes"
+                  >
+                    Tropes
+                  </td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Description"
+                    data-key="tropes_desc"
+                  ></td>
+                </tr>
+                <tr
+                  class="bg-gray-50 border-b dark:bg-gray-700 dark:border-gray-700"
+                >
+                  <td
+                    class="px-6 py-4 align-top font-bold text-gray-900"
+                    data-label="R"
+                  >
+                    R
+                  </td>
+                  <td
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-normal align-top"
+                    data-label="Item"
+                  >
+                    Representation Models
+                  </td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Description"
+                    data-key="rep_desc"
+                  ></td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <td
+                    class="px-6 py-4 align-top font-bold text-gray-900"
+                    data-label="A"
+                  >
+                    A
+                  </td>
+                  <td
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-normal align-top"
+                    data-label="Item"
+                  >
+                    Agency
+                  </td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Description"
+                    data-key="agency_desc"
+                  ></td>
+                </tr>
+                <tr
+                  class="bg-gray-50 border-b dark:bg-gray-700 dark:border-gray-700"
+                >
+                  <td
+                    class="px-6 py-4 align-top font-bold text-gray-900"
+                    data-label="C"
+                  >
+                    C
+                  </td>
+                  <td
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-normal align-top"
+                    data-label="Item"
+                  >
+                    Cultural Language
+                  </td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Description"
+                    data-key="culture_desc"
+                  ></td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                  <td
+                    class="px-6 py-4 align-top font-bold text-gray-900"
+                    data-label="E"
+                  >
+                    E
+                  </td>
+                  <td
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-normal align-top"
+                    data-label="Item"
+                  >
+                    Emerging Voices
+                  </td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Description"
+                    data-key="emerging_desc"
+                  ></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="resources">
+          <div class="max-w-7xl mx-auto">
+            <p
+              class="text-lg text-gray-700 leading-relaxed mb-8"
+              data-key="resource_bridge"
+            ></p>
+          </div>
+          <div
+            <div
+            class="responsive-table relative overflow-x-auto max-w-7xl mx-auto rounded-lg"
+          >
+            <table
+              class="w-full text-sm text-left rtl:text-right text-gray-600 dark:text-gray-400"
+            >
+              <thead
+                class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
+              >
+                <tr class="rounded-lg">
+                  <th scope="col" class="px-6 py-3 rounded-tl-lg">No</th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3"
+                    data-key="table_head_resources"
+                  ></th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3"
+                    data-key="table_head_detail"
+                  ></th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 rounded-tr-lg"
+                    data-key="table_head_notes"
+                  ></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-white">
+                  <td class="px-6 py-4 align-top" data-label="No">1</td>
+                  <td
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-normal align-top"
+                    data-label="Resource"
+                  >
+                    A Kind of Spark (Book)
+                  </td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Detail"
+                    data-lang-html="material_1_detail"
+                  ></td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Significance/Notes"
+                    data-lang-html="material_1_significance"
+                  ></td>
+                </tr>
+                <tr class="bg-gray-50">
+                  <td class="px-6 py-4 align-top" data-label="No">2</td>
+                  <td
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-normal align-top"
+                    data-label="Resource"
+                  >
+                    Simple Simon (Film)
+                  </td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Detail"
+                    data-lang-html="material_2_detail"
+                  ></td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Significance/Notes"
+                    data-lang-html="material_2_significance"
+                  ></td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="px-6 py-4 align-top" data-label="No">3</td>
+                  <td
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-normal align-top"
+                    data-label="Resource"
+                  >
+                    My Name Is Khan (Film)
+                  </td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Detail"
+                    data-lang-html="material_3_detail"
+                  ></td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Significance/Notes"
+                    data-lang-html="material_3_significance"
+                  ></td>
+                </tr>
+                <tr class="bg-gray-50">
+                  <td class="px-6 py-4 align-top" data-label="No">4</td>
+                  <td
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-normal align-top"
+                    data-label="Resource"
+                  >
+                    Aku Jati, Aku Asperger (Film)
+                  </td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Detail"
+                    data-lang-html="material_4_detail"
+                  ></td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Significance/Notes"
+                    data-lang-html="material_4_significance"
+                  ></td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="px-6 py-4 align-top" data-label="No">5</td>
+                  <td
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-normal align-top"
+                    data-label="Resource"
+                  >
+                    Miracle in Cell No. 7 (Film)
+                  </td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Detail"
+                    data-lang-html="material_5_detail"
+                  ></td>
+                  <td
+                    class="px-6 py-4 align-top"
+                    data-label="Significance/Notes"
+                    data-lang-html="material_5_significance"
+                  ></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-sm" data-key="footer_copyright">
+          &copy; 2024 ispf. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script src="language-switcher.js"></script>
+  </body>
+</html>
